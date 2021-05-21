@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Ask Question !!</h2>
+<!--Mat dialog content-->
+<mat-dialog-content>
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Type your question here</mat-label>
+      <input matInput/>
+      <mat-icon matSuffix (click)="showValue()">mic</mat-icon>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<!--Mat Dialog Action-->
+<mat-dialog-actions>
+  <button mat-raised-button color="primary">POST</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">CANCEL</button>
+</mat-dialog-actions>

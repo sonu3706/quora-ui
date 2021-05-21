@@ -1,0 +1,23 @@
+.main-div {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 40%;
+}
+
+.example-header-image {
+  //background-image: url("../../../../../assets/images/register.png");
+  background-size: cover;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
