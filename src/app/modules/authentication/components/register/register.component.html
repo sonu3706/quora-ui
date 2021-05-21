@@ -1,0 +1,60 @@
+<div class="container container-fluid main-div">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Create Account with us!!</mat-card-title>
+      <mat-card-subtitle>Create your account and let's get started</mat-card-subtitle>
+    </mat-card-header>
+    <!--Card Content-->
+    <mat-card-content class="container">
+      <form class="login-form">
+
+        <!--Email-->
+        <div class="login-form">
+          <mat-form-field appearance="outline">
+            <div class="form-group">
+              <input type="email" matInput placeholder="Email Id" autocomplete="off" />
+            </div>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!--First Name-->
+        <div class="login-form">
+          <mat-form-field appearance="outline">
+            <div class="form-group">
+              <input type="text" matInput placeholder="First Name" autocomplete="off" />
+            </div>
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!--Last Name-->
+        <div class="login-form">
+          <mat-form-field appearance="outline">
+            <div class="form-group">
+              <input type="text" matInput placeholder="Last Name" autocomplete="off" />
+            </div>
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!--Gender-->
+        <div class="login-form">
+          <span>Gender</span>
+          <mat-radio-group [formControl]="genderControl">
+            <mat-radio-button value="MALE">Male</mat-radio-button>
+            <mat-radio-button value="FEMALE">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <p>
+        <span>Already have account!! <a [routerLink]="['/auth/login']" routerlinkactive="router-link-active">click
+            here</a></span>
+      </p>
+      <button mat-flat-button color="primary" type="submit">Register</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

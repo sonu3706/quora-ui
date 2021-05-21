@@ -1,0 +1,13 @@
+<p>
+  <mat-toolbar color="primary">
+    <span>QUORA - Ask me anything!</span>
+    <span class="example-spacer"></span>
+    <span>
+      <button mat-raised-button [matMenuTriggerFor]="belowMenu">Login/Register</button>
+      <mat-menu #belowMenu="matMenu" yPostion="below">
+        <button mat-menu-item (click)="navigateToLogin()">I want to Login</button>
+        <button mat-menu-item (click)="navigateToRegister()">Register my account</button>
+      </mat-menu>
+    </span>
+  </mat-toolbar>
+</p>
