@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -16,3 +17,4 @@ export class HttpInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
+*/
