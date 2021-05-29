@@ -3,17 +3,24 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Create Account with us!!</mat-card-title>
-      <mat-card-subtitle>Create your account and let's get started</mat-card-subtitle>
+      <mat-card-subtitle
+        >Create your account and let's get started</mat-card-subtitle
+      >
     </mat-card-header>
     <!--Card Content-->
     <mat-card-content class="container">
       <form class="login-form" [formGroup]="registerForm">
-
         <!--Email-->
         <div class="login-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="email" matInput placeholder="Email Id" autocomplete="off" formControlName="email"/>
+              <input
+                type="email"
+                matInput
+                placeholder="Email Id"
+                autocomplete="off"
+                formControlName="email"
+              />
             </div>
             <mat-icon matSuffix>email</mat-icon>
           </mat-form-field>
@@ -23,7 +30,13 @@
         <div class="login-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="text" matInput placeholder="First Name" autocomplete="off" formControlName="firstName"/>
+              <input
+                type="text"
+                matInput
+                placeholder="First Name"
+                autocomplete="off"
+                formControlName="firstName"
+              />
             </div>
             <mat-icon matSuffix>account_circle</mat-icon>
           </mat-form-field>
@@ -33,7 +46,13 @@
         <div class="login-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="text" matInput placeholder="Last Name" autocomplete="off" formControlName="lastName"/>
+              <input
+                type="text"
+                matInput
+                placeholder="Last Name"
+                autocomplete="off"
+                formControlName="lastName"
+              />
             </div>
             <mat-icon matSuffix>account_circle</mat-icon>
           </mat-form-field>
@@ -41,7 +60,7 @@
 
         <!--Gender-->
         <div class="login-form">
-          <span>Gender :-  </span>
+          <span>Gender :- </span>
           <mat-radio-group formControlName="gender">
             <mat-radio-button value="MALE">Male</mat-radio-button>
             <mat-radio-button value="FEMALE">Female</mat-radio-button>
@@ -53,7 +72,13 @@
         <div class="register-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="password" matInput placeholder="Password" autocomplete="off" formControlName="password"/>
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                autocomplete="off"
+                formControlName="password"
+              />
             </div>
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
@@ -63,20 +88,38 @@
         <div class="register-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="password" matInput placeholder="Confirm Password" autocomplete="off" formControlName="confirmPassword"/>
+              <input
+                type="password"
+                matInput
+                placeholder="Confirm Password"
+                autocomplete="off"
+                formControlName="confirmPassword"
+              />
             </div>
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
         </div>
-
       </form>
     </mat-card-content>
     <mat-card-actions>
       <p>
-        <span>Already have account!! <a [routerLink]="['/auth/login']" routerlinkactive="router-link-active">click
-            here</a></span>
+        <span
+          >Already have account!!
+          <a
+            [routerLink]="['/auth/login']"
+            routerlinkactive="router-link-active"
+            >click here</a
+          ></span
+        >
       </p>
-      <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Register</button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Register
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

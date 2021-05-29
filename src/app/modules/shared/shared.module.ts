@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from "../material/material.module";
+import { MaterialModule } from '../material/material.module';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { SecondaryHeaderComponent } from './components/secondary-header/secondary-header.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -10,12 +10,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
-
-
 @NgModule({
-  declarations: [
-    MainHeaderComponent,
-    SecondaryHeaderComponent],
+  declarations: [MainHeaderComponent, SecondaryHeaderComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -24,8 +20,8 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
-  exports: [MainHeaderComponent, SecondaryHeaderComponent]
+  exports: [MainHeaderComponent, SecondaryHeaderComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

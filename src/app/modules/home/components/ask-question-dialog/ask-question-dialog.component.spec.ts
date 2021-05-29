@@ -8,9 +8,8 @@ describe('AskQuestionDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AskQuestionDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AskQuestionDialogComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
