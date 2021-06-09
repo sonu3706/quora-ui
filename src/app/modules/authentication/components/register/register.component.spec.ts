@@ -69,10 +69,45 @@ describe('RegisterComponent', () => {
     expect(lastNameControl.errors).not.toBeNull();
   });
 
-  it('[Gender is required] - Gender is required', () => {});
-  it('[Password] - Password is required', () => {});
-  it('[Password Min Length] - Should be 8 chars', () => {});
+  it('[Gender is required] - Gender is required', () => {
+    let genderControl = registerComponent.registerForm.controls.gender;
+    genderControl.setValue('MALE');
+    expect(genderControl.valid).toBeTruthy();
+    expect(genderControl.errors).toBeNull();
+    expect(genderControl.value).toBe('MALE');
+  });
+
+  it('[Password] - Password is required', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('123456789');
+    expect(passwordControl.valid).toBeTruthy();
+    expect(passwordControl.errors).toBeNull();
+    expect(passwordControl.value).toBe('123456789');
+  });
+
+  it('[Password Min Length] - Should be 8 chars', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('123456789');
+    expect(passwordControl.value.toString().length).toBeGreaterThanOrEqual(8);
+  });
+
   it('[Password Max Length] - Should be 20 chars', () => {});
-  it('[Confirm Password] - Confirm password is required', () => {});
-  it('[Password and Confirm password] - Password and confirm password should match', () => {});
+
+  it('[Confirm Password] - Confirm password is required', () => {
+    let confirmPasswordControl =
+      registerComponent.registerForm.controls.confirmPassword;
+    confirmPasswordControl.setValue('123456789');
+    expect(confirmPasswordControl.valid).toBeTruthy();
+    expect(confirmPasswordControl.errors).toBeNull();
+    expect(confirmPasswordControl.value).toBe('123456789');
+  });
+
+  it('[Password and Confirm password] - Password and confirm password should match', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('123456789');
+    let confirmPasswordControl =
+      registerComponent.registerForm.controls.confirmPassword;
+    confirmPasswordControl.setValue('123456789');
+    expect(passwordControl.value).toBe(confirmPasswordControl.value);
+  });
 });

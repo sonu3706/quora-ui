@@ -21,7 +21,7 @@ export class SecondaryHeaderComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   public openQuestionDialog(): void {
     const dialogRef = this.dialog.open(AskQuestionDialogComponent, {
