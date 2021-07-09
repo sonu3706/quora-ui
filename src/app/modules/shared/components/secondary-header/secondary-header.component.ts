@@ -11,6 +11,7 @@ import { AskQuestionDialogComponent } from '../../../home/components/ask-questio
   styleUrls: ['./secondary-header.component.scss'],
 })
 export class SecondaryHeaderComponent {
+  public categoryList: string [] = ['Lifestyle', 'IT & Software', 'World News'];
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -29,7 +30,7 @@ export class SecondaryHeaderComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog has closed');
+      console.log(result);
     });
   }
 }

@@ -2,15 +2,32 @@
 <!--Mat dialog content-->
 <mat-dialog-content>
   <div>
+    <form [formGroup]="questionForm">
     <mat-form-field appearance="standard">
       <mat-label>Type your question here</mat-label>
-      <input matInput />
+      <input matInput formControlName="questionContent" />
       <mat-icon matSuffix (click)="showValue()">mic</mat-icon>
     </mat-form-field>
+
+    <!-- Chip Section Start-->
+    <mat-form-field class="chip-list">
+      <mat-label>Enter a categories</mat-label>
+      <mat-chip-list #chipList aria-label="category selection">
+        <mat-chip *ngFor="let category of categories" color="primary" selected [selectable]="selectable"
+          [removable]="removable" (removed)="remove(category)">
+          {{ category }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" type="text" />
+      </mat-chip-list>
+    </mat-form-field>
+    <!-- Chip Section Ends -->
+  </form>
   </div>
 </mat-dialog-content>
 <!--Mat Dialog Action-->
 <mat-dialog-actions>
-  <button mat-raised-button color="primary">POST</button>
+  <button mat-raised-button color="primary" (click)="postQuestion()">POST</button>
   <button mat-raised-button color="warn" (click)="onNoClick()">CANCEL</button>
 </mat-dialog-actions>

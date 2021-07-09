@@ -13,6 +13,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [],
@@ -31,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatMenuModule,
     MatRadioModule,
+    MatChipsModule
   ],
   exports: [
     LayoutModule,
@@ -46,6 +49,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatMenuModule,
     MatRadioModule,
+    MatChipsModule
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

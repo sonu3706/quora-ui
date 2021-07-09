@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/utilities/data.service';
 
 @Component({
   selector: 'app-main-header',
@@ -7,9 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-header.component.scss'],
 })
 export class MainHeaderComponent implements OnInit {
-  constructor(public router: Router) {}
 
-  ngOnInit(): void {}
+  public isUserLoggedIn: boolean = false;
+  constructor(public router: Router, private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.dataService.isUserLoggedIn().subscribe((state: boolean) => {  
+        this.isUserLoggedIn = state
+    });
+  }
 
   public navigateToRegister(): void {
     this.router.navigate(['/auth/register']).then((response) => {

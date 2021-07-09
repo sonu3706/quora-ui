@@ -7,6 +7,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './services/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [TokenInterceptor],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,342 @@
+ng test --include **/register.component.spec.ts 
+
+test.ts
+
+First, ng test uses Webpack to compile your code into a JavaScript bundle. The entry point for the bundle is src/test.ts. 
+This file initializes the Angular testing environment – the TestBed – and then imports all files in the directory tree that match the pattern .spec.ts.
+
+
+The test bundle with the entry point test.ts works differently. 
+It does not start with one Module and walks through all its dependencies. It merely imports all files whose name ends with .spec.ts.
+
+
+
+
+
+Karma
+Second, ng test launches Karma, the test runner. Karma starts a development server at http://localhost:9876/ that serves the JavaScript bundles compiled by Webpack.
+
+Karma then launches one or more browsers. 
+The idea of Karma is to run the same tests in different browsers to ensure cross-browser interoperability. 
+All widely used browsers are supported: Chrome, Internet Explorer, Edge, Firefox and Safari. Per default, Karma starts Chrome.
+
+
+
+setup: where we provide a suitable test Environment and conditions for which we are going to test our method.
+Actual Test: where we call the method.
+Assertion: where we assert or expect the desired result.
+
+
+Test runner
+The launched browser navigates to http://localhost:9876/. As mentioned, this site serves the test runner and the test bundle. 
+The tests start immediately. You can track the progress and read the results in the browser and on the shell.
+Webpack watches changes on the .spec.ts files and files imported by them. When you change the implementation code or  the test code, any spec file, 
+Webpack automatically re-compiles the bundle and pushes it to the open browsers. All tests will be restarted.
+
+
+TestBed
+The TestBed is the first and largest of the Angular testing utilities.
+Is one of the main utilities for unit testing components, driectives, services in angular and it is angular specific
+It creates dynamically constructed  angular test module that emulates angular's @NgModules
+It also provides method for creating component and service for unit test cases.
+
+TestBed.createComponent() 
+creates an instance of the components, adds a corresponding element to the test-runner DOM, and returns a ComponentFixture.
+The createComponent method freezes the current TestBed definition, closing it to further configuration.
+
+ComponentFixture
+The ComponentFixture is a test harness for interacting with the created component and its corresponding element.
+Access the component instance through the fixture and confirm it exists with a Jasmine expectation:
+The fixture creates the component just like it the browser would in real life. Using DebugElement, you can even query the DOM for further tests.
+
+=========================================================REGISTER===============================================
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import {ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+
+import { RegisterComponent } from './register.component';
+import {RestApiService} from '../../../../services/utilities/restapi.service';
+import {RegisterResponse} from '../../../../models/register-response.model';
+import {of} from 'rxjs';
+
+describe('RegisterComponent', () => {
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
+ // let registerServiceSpy: RestApiService<RegisterResponse>;
+  let registerServiceSpy: jasmine.SpyObj<RestApiService<RegisterResponse>>;
+
+  beforeEach(async () => {
+    const registerServiceSpyObject = jasmine.createSpyObj('RestApiService', ['postData']);
+    await TestBed.configureTestingModule({
+      declarations: [RegisterComponent],
+      imports: [
+        SharedModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        RxReactiveFormsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientTestingModule
+      ],
+      providers: [ { provide: RestApiService, useValue: registerServiceSpyObject }]
+    }).compileComponents();
+    registerServiceSpy = TestBed.get(RestApiService);
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(RegisterComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Should make API calls', fakeAsync(() => {
+    component.registerFormGroup.controls.email.setValue('chandan@abc.com');
+    component.registerFormGroup.controls.name.setValue('chandan mishra');
+    component.registerFormGroup.controls.password.setValue('123456789');
+    const resgisterResponse: RegisterResponse = new RegisterResponse();
+    resgisterResponse.status = true;
+    registerServiceSpy.postData.and.returnValue(of(resgisterResponse));
+
+    component.registerApi();
+
+    tick();
+    expect(component.status).toBeTruthy();
+    flush();
+    discardPeriodicTasks();
+  }));
+});
+
+=======================================================================LOGIN============================================
+
+
+
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
+import {SharedModule} from 'src/app/modules/shared/shared.module';
+import {RestApiService} from 'src/app/services/utilities/restapi.service';
+import {TokenService} from 'src/app/services/utilities/token.service';
+
+import {LoginComponent} from './login.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+  let tokenService: TokenService;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      imports: [ SharedModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        RxReactiveFormsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientTestingModule],
+      providers: [TokenService, RestApiService],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginComponent);
+    tokenService = TestBed.inject(TokenService);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Should return true value', () => {
+    window.sessionStorage.setItem('access_token', '123456789');
+    spyOn(tokenService, 'isTokenPresent').and.returnValue(true);
+    const value = component.isUserLoggedIn();
+    expect(value).toBeTruthy();
+    expect(tokenService.isTokenPresent).toHaveBeenCalled();
+  });
+});
+
+==============================================APP-ROUTING====================================
+
+import { HttpClientModule } from '@angular/common/http';
+import { Location } from '@angular/common';
+import {
+  ComponentFixture,
+  discardPeriodicTasks,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import {
+  RouterTestingModule,
+  SpyNgModuleFactoryLoader,
+} from '@angular/router/testing';
+import { routes } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthModule } from './modules/auth/auth.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { SharedModule } from './modules/shared/shared.module';
+
+describe('AppRouting', () => {
+  let location: Location;
+  let router: Router;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        SharedModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule
+      ],
+      declarations: [AppComponent],
+      providers: [SpyNgModuleFactoryLoader],
+    });
+
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    fixture = TestBed.createComponent(AppComponent);
+    router.initialNavigation();
+  });
+
+  it('fakeAsync works', fakeAsync(() => {
+    const promise = new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
+    let done = false;
+    promise.then(() => (done = true));
+    tick(50);
+    expect(done).toBeTruthy();
+  }));
+
+  it('Navigate to "" redirect you to /home', fakeAsync(() => {
+    router.navigate(['']).then(() => {
+      expect(location.path()).toBe('/home');
+    });
+    flush();
+  }));
+
+  /* Test case to load HomeComponent if url is /home */
+  it('Should navigate to /home', fakeAsync(() => {
+    router.navigateByUrl('/home').then(() => {
+      expect(location.path()).toBe('/home');
+    });
+    flush();
+  }));
+
+  /* Testing loading of /auth/login */
+  it('Should navigate to /auth/login', fakeAsync(() => {
+    const loader = TestBed.inject(SpyNgModuleFactoryLoader);
+    loader.stubbedModules = { lazyModule: AuthModule };
+    router.resetConfig([
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./modules/auth/auth.module').then((auth) => auth.AuthModule),
+      },
+    ]);
+    router.navigateByUrl('/auth/login');
+    tick();
+    fixture.detectChanges();
+    expect(location.path()).toBe('/auth/login');
+    flush();
+    discardPeriodicTasks();
+  }));
+
+  /* Test case for loading /auth/register */
+  it('Should navigate to /auth/register url ', fakeAsync(() => {
+    const loader = TestBed.inject(SpyNgModuleFactoryLoader);
+    loader.stubbedModules = { lazyModule: AuthModule };
+    router.resetConfig([
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./modules/auth/auth.module').then((auth) => auth.AuthModule),
+      },
+    ]);
+    router.navigateByUrl('/auth/register').then(() => {
+      expect(location.path()).toBe('/auth/register');
+      flush();
+    });
+  }));
+
+  /* Test case for loading dashboard */
+  it('Should navigate to /dashboard url ', fakeAsync(() => {
+    const loader = TestBed.inject(SpyNgModuleFactoryLoader);
+    loader.stubbedModules = { lazyModule: DashboardModule };
+    router.resetConfig([
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (dashboard) => dashboard.DashboardModule
+          ),
+      },
+    ]);
+    router.navigateByUrl('/dashboard').then(() => {
+      expect(location.path()).toBe('/dashboard');
+      flush();
+    });
+  }));
+});
+
+export class DoctorOnline {
+ public isDoctorAvailable(status: string): boolean {
+   return status === 'Active';
+  }
+}
+
+
+
+===================================== class ====================================
+
+import { DoctorOnline } from './doctor-online';
+
+describe('DoctorOnline', () => {
+  let doctorClass: DoctorOnline;
+
+  beforeEach(() => {
+    doctorClass = new DoctorOnline();
+  });
+  it('should create an instance', () => {
+    expect(doctorClass).toBeTruthy();
+  });
+
+  it('It should return true when status is active', () => {
+    const status = doctorClass.isDoctorAvailable('Active');
+    expect(status).toBeTruthy();
+  });
+});
+
+
+
+
+
+
+
+ public isTokenPresent(): boolean {
+    const accessToken = window.sessionStorage.getItem('access_token');
+    return accessToken != null;
+  }
+
+

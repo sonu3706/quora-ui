@@ -4,6 +4,27 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://localhost:8082',
+  auth: {
+    restUrl: '/api/v1/auth',
+    actionUrl: {
+      loginUrl: '/login',
+      registerUrl: '/register',
+    },
+  },
+  users: {
+    restUrl: '/api/v1/users',
+    actionUrl: {
+      saveUser: '',
+    },
+  },
+  questions: {
+    restUrl: '/api/v1/questions',
+    actionUrl: {
+      postQuestion: '/post'
+    }
+  },
+  comments: {},
 };
 
 /*

@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0,
+	"tasks": [
+		{
+			"label": "Angular Serve",
+			"type":  "shell",
+			"command": "bash",
+			"args": ["${workspaceFolder}/.vscode/ng-serve.sh"]
+		}
+	]
+}

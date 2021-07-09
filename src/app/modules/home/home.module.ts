@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, AskQuestionDialogComponent, DashboardComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, MaterialModule],
+  imports: [CommonModule, SharedModule, HomeRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
 })
 export class HomeModule {}

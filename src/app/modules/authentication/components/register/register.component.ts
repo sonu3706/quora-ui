@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { RestService } from '../../../../services/utilities/rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -51,6 +52,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
     if (this.registerForm.touched && this.registerForm.valid) {
       //  Make API call
+      this.registerAccount();
     } else {
       console.log(this.registerForm.errors);
     }
@@ -72,9 +74,10 @@ export class RegisterComponent implements OnInit {
     };
   }
 
+  /* Register user */
   public registerAccount(): void {
-    const baseUrl: string = '';
-    const restUrl: string = '';
+    const baseUrl: string = environment.baseUrl;
+    const restUrl: string = `${environment.auth.restUrl} ${environment.auth.actionUrl.registerUrl}`;
     let userAuthObject = this.constructUserAuthObject();
 
     this.registerService
@@ -90,14 +93,21 @@ export class RegisterComponent implements OnInit {
         }
       );
   }
+
+  /* Create user */
   public saveUser(): void {
-    const baseUrl: string = '';
-    const restUrl: string = '';
+    const baseUrl: string = environment.baseUrl;
+    const restUrl: string = `${environment.users.restUrl} ${environment.auth.actionUrl.registerUrl}`
     let userObject = this.constructUserObject();
 
     this.saveUserService.postDataApi(baseUrl, restUrl, userObject).subscribe(
-      (response) => {},
-      (httpErrorResponse: HttpErrorResponse) => {}
+      (response) => {
+        console.log(response);
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+        
+      }
     );
   }
 }
