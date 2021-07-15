@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('RegisterComponent', () => {
   let registerComponent: RegisterComponent;
@@ -25,6 +26,7 @@ describe('RegisterComponent', () => {
         BrowserModule,
         HttpClientModule,
         HttpClientTestingModule,
+        RouterTestingModule
       ],
     }).compileComponents();
   });
@@ -46,12 +48,41 @@ describe('RegisterComponent', () => {
     expect(emailControl.errors).toBeNull();
   });
 
-  it('[First Name]- First name is required', () => {
+  it('[Email valid check] - Should check email address is invalid', () => {
+    let emailControl = registerComponent.registerForm.controls.email;
+    emailControl.setValue('abc');
+    expect(emailControl.invalid).toBeTrue();
+    expect(emailControl.hasError('email')).toBeTruthy();
+  });
+
+  it('[Email is required success] - Should check email address is required', () => {
+    let emailControl = registerComponent.registerForm.controls.email;
+    emailControl.setValue('chandanmishra3706@gmail.com');
+    expect(emailControl.valid).toBeTrue();
+    expect(emailControl.value).toBe('chandanmishra3706@gmail.com');
+  });
+
+  it('[Email is required failure] - Should check email address is required',  () => {
+    let emailControl = registerComponent.registerForm.controls.email;
+    emailControl.setValue('');
+    expect(emailControl.invalid).toBeTrue();
+    expect(emailControl.hasError('required')).toBeTrue();
+  });
+
+  it('[First Name is required Success]- First name is required', () => {
     let firstNameControl = registerComponent.registerForm.controls.firstName;
     firstNameControl.setValue('Alex');
     expect(firstNameControl.valid).toBeTruthy();
     expect(firstNameControl.errors).toBeNull();
     expect(firstNameControl.value).toBe('Alex');
+  });
+
+  it('[First Name is required Failure]- First name is required', () => {
+    let firstNameControl = registerComponent.registerForm.controls.firstName;
+    firstNameControl.setValue('');
+    expect(firstNameControl.invalid).toBeTruthy();
+    expect(firstNameControl.hasError('required')).toBeTrue();
+
   });
 
   it('[Last Name]- Last name is required', () => {
