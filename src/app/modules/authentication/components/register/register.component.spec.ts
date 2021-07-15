@@ -108,7 +108,7 @@ describe('RegisterComponent', () => {
     expect(genderControl.value).toBe('MALE');
   });
 
-  it('[Password] - Password is required', () => {
+  it('[Password Success] - Password is required', () => {
     let passwordControl = registerComponent.registerForm.controls.password;
     passwordControl.setValue('123456789');
     expect(passwordControl.valid).toBeTruthy();
@@ -116,13 +116,36 @@ describe('RegisterComponent', () => {
     expect(passwordControl.value).toBe('123456789');
   });
 
-  it('[Password Min Length] - Should be 8 chars', () => {
+  it('[Password Failure] - Password is required', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('');
+    expect(passwordControl.invalid).toBeTruthy();
+    expect(passwordControl.hasError('required')).toBeTrue();
+  });
+
+  it('[Password Min Length success] - Should be 8 chars', () => {
     let passwordControl = registerComponent.registerForm.controls.password;
     passwordControl.setValue('123456789');
     expect(passwordControl.value.toString().length).toBeGreaterThanOrEqual(8);
   });
 
-  it('[Password Max Length] - Should be 20 chars', () => {});
+  it('[Password Min Length failure] - Should be 8 chars', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('123456');
+    expect(passwordControl.hasError('minlength')).toBeTrue();
+  });
+
+  it('[Password Max Length success] - Should be 20 chars', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('12345678912345678911');
+    expect(passwordControl.value.toString().length).toBeLessThanOrEqual(20);
+  });
+
+  it('[Password Max Length failure] - Should be 20 chars', () => {
+    let passwordControl = registerComponent.registerForm.controls.password;
+    passwordControl.setValue('12345678912345678911222');
+    expect(passwordControl.hasError('maxlength')).toBeTrue();
+  });
 
   it('[Confirm Password] - Confirm password is required', () => {
     let confirmPasswordControl =
