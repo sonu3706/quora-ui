@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
   /* Register user */
   public registerAccount(): void {
     const baseUrl: string = environment.baseUrl;
-    const restUrl: string = `${environment.auth.restUrl} ${environment.auth.actionUrl.registerUrl}`;
+    const restUrl: string = `${environment.auth.restUrl}${environment.auth.actionUrl.registerUrl}`;
     let userAuthObject = this.constructUserAuthObject();
 
     this.registerService
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data) {
-            this.saveUser();
+            //this.saveUser();
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit {
   /* Create user */
   public saveUser(): void {
     const baseUrl: string = environment.baseUrl;
-    const restUrl: string = `${environment.users.restUrl} ${environment.auth.actionUrl.registerUrl}`
+    const restUrl: string = `${environment.users.restUrl}${environment.auth.actionUrl.registerUrl}`
     let userObject = this.constructUserObject();
 
     this.saveUserService.postDataApi(baseUrl, restUrl, userObject).subscribe(
@@ -106,7 +106,6 @@ export class RegisterComponent implements OnInit {
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
-        
       }
     );
   }

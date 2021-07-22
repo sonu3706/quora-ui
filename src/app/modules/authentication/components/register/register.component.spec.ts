@@ -1,20 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
 
-import { RegisterComponent } from './register.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../../../material/material.module';
-import { SharedModule } from '../../../shared/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from "@angular/router/testing";
+import {RegisterComponent} from './register.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../../../material/material.module';
+import {SharedModule} from '../../../shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {RouterTestingModule} from "@angular/router/testing";
+import {RestService} from "../../../../services/utilities/rest.service";
+import {of} from "rxjs";
 
 describe('RegisterComponent', () => {
   let registerComponent: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
+  let httpTestingController: HttpTestingController;
+  let registerServiceSpy: RestService<any>;
 
   beforeEach(async () => {
+    const registerSpyObject = jasmine.createSpyObj('RestService', ['postDataApi']);
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       imports: [
@@ -28,17 +33,15 @@ describe('RegisterComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule
       ],
+      providers: [{provide: RestService, useValue: registerSpyObject}],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
     registerComponent = fixture.componentInstance;
+    registerServiceSpy = TestBed.inject(RestService);
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(registerComponent).toBeTruthy();
   });
 
   it('[Email Check] - Should check email address is valid', () => {
@@ -62,7 +65,7 @@ describe('RegisterComponent', () => {
     expect(emailControl.value).toBe('chandanmishra3706@gmail.com');
   });
 
-  it('[Email is required failure] - Should check email address is required',  () => {
+  it('[Email is required failure] - Should check email address is required', () => {
     let emailControl = registerComponent.registerForm.controls.email;
     emailControl.setValue('');
     expect(emailControl.invalid).toBeTrue();
@@ -164,4 +167,30 @@ describe('RegisterComponent', () => {
     confirmPasswordControl.setValue('123456789');
     expect(passwordControl.value).toBe(confirmPasswordControl.value);
   });
+
+  it('[Register API Success] - Should register account and return', fakeAsync(() => {
+    registerComponent.registerForm.controls.email.setValue('chandan@abc.com');
+    registerComponent.registerForm.controls.password.setValue('12345678');
+
+    // @ts-ignore
+    registerServiceSpy.postDataApi.and.returnValue(of(true));
+    registerComponent.registerAccount();
+
+    expect(registerServiceSpy.postDataApi).toHaveBeenCalled();
+    expect(registerServiceSpy.postDataApi).toHaveBeenCalledWith(
+      'http://localhost:8082',
+      '/api/v1/auth/register',
+      getUserObject()
+    );
+
+    tick();
+    flush();
+    discardPeriodicTasks();
+
+  }));
 });
+
+/* Private method to construct user object */
+function getUserObject(): any {
+  return {userEmail: 'chandan@abc.com', userPassword: '12345678'};
+}
