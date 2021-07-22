@@ -24,6 +24,6 @@ import { DataService } from 'src/app/services/utilities/data.service';
     MatListModule,
   ],
   exports: [MainHeaderComponent, SecondaryHeaderComponent],
-  providers: []
+  providers: [],
 })
 export class SharedModule {}

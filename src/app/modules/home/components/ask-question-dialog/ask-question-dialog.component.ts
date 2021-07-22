@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-ask-question-dialog',
@@ -11,7 +15,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./ask-question-dialog.component.scss'],
 })
 export class AskQuestionDialogComponent implements OnInit {
-
   public visible = true;
   public selectable = true;
   public removable = true;
@@ -20,21 +23,24 @@ export class AskQuestionDialogComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   // @ts-ignore
   public questionForm: FormGroup = null;
-  constructor(public dialogRef: MatDialogRef<AskQuestionDialogComponent>, private formBuilder: FormBuilder) { }
+  constructor(
+    public dialogRef: MatDialogRef<AskQuestionDialogComponent>,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
-   }
+  }
 
   public createForm(): void {
     this.questionForm = this.formBuilder.group({
       questionContent: new FormControl('', [Validators.required]),
-      categories: new FormControl('', [Validators.required])
+      categories: new FormControl('', [Validators.required]),
     });
   }
 
   public onNoClick(): void {
-    this.dialogRef.close({data: 'closing'});
+    this.dialogRef.close({ data: 'closing' });
   }
 
   showValue(): void {
@@ -62,10 +68,8 @@ export class AskQuestionDialogComponent implements OnInit {
     this.questionForm.controls.categories.setValue(this.categories);
     if (this.questionForm.valid) {
       console.log('Make API call');
-      
     } else {
       console.log('Throw error');
-      
     }
   }
 }

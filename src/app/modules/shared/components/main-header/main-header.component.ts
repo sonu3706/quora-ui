@@ -8,13 +8,12 @@ import { DataService } from 'src/app/services/utilities/data.service';
   styleUrls: ['./main-header.component.scss'],
 })
 export class MainHeaderComponent implements OnInit {
-
   public isUserLoggedIn: boolean = false;
   constructor(public router: Router, private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.isUserLoggedIn().subscribe((state: boolean) => {  
-        this.isUserLoggedIn = state
+    this.dataService.isUserLoggedIn().subscribe((state: boolean) => {
+      this.isUserLoggedIn = state;
     });
   }
 

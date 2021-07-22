@@ -1,7 +1,7 @@
 <div class="container container-fluid main-div">
   <mat-card class="login-card">
     <mat-card-header>
-			<div mat-card-avatar class="example-header-image"></div>
+      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Please provide your identity</mat-card-title>
       <mat-card-subtitle>Lets get started</mat-card-subtitle>
     </mat-card-header>
@@ -12,7 +12,15 @@
         <div class="login-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input type="email" matInput placeholder="Email id" name="email" id="email" autocomplete="off" formControlName="email"/>
+              <input
+                type="email"
+                matInput
+                placeholder="Email id"
+                name="email"
+                id="email"
+                autocomplete="off"
+                formControlName="email"
+              />
             </div>
             <mat-icon matSuffix>email</mat-icon>
           </mat-form-field>
@@ -22,7 +30,15 @@
         <div class="login-form">
           <mat-form-field appearance="outline">
             <div class="form-group">
-              <input matInput type="password" name="password" id="password" placeholder="Password" autocomplete="off" formControlName="password"/>
+              <input
+                matInput
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="off"
+                formControlName="password"
+              />
             </div>
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
@@ -32,7 +48,14 @@
     </mat-card-content>
     <!-- Button -->
     <mat-card-actions *ngIf="loginForm.valid">
-      <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Login</button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Login
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

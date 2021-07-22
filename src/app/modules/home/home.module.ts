@@ -10,6 +10,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, AskQuestionDialogComponent, DashboardComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    HomeRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class HomeModule {}

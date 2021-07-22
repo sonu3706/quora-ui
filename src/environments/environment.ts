@@ -21,8 +21,8 @@ export const environment = {
   questions: {
     restUrl: '/api/v1/questions',
     actionUrl: {
-      postQuestion: '/post'
-    }
+      postQuestion: '/post',
+    },
   },
   comments: {},
 };

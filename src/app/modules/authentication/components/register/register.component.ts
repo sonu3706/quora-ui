@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit {
   /* Create user */
   public saveUser(): void {
     const baseUrl: string = environment.baseUrl;
-    const restUrl: string = `${environment.users.restUrl}${environment.auth.actionUrl.registerUrl}`
+    const restUrl: string = `${environment.users.restUrl}${environment.auth.actionUrl.registerUrl}`;
     let userObject = this.constructUserObject();
 
     this.saveUserService.postDataApi(baseUrl, restUrl, userObject).subscribe(

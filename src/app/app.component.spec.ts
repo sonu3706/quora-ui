@@ -1,15 +1,15 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
-import {DebugElement, NO_ERRORS_SCHEMA} from "@angular/core";
-import {By} from "@angular/platform-browser";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -37,7 +37,7 @@ describe('AppComponent', () => {
   it('It should have child app-main-header', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const {debugElement} = fixture;
+    const { debugElement } = fixture;
     const appMainHeader = debugElement.query(By.css('app-main-header'));
     expect(appMainHeader).toBeTruthy();
   });
@@ -50,6 +50,9 @@ describe('AppComponent', () => {
   });
 });
 
-export function findComponent<T>(fixture: ComponentFixture<T>, selector: string): DebugElement {
+export function findComponent<T>(
+  fixture: ComponentFixture<T>,
+  selector: string
+): DebugElement {
   return fixture.debugElement.query(By.css(selector));
 }

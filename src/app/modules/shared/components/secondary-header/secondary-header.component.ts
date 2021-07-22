@@ -11,7 +11,7 @@ import { AskQuestionDialogComponent } from '../../../home/components/ask-questio
   styleUrls: ['./secondary-header.component.scss'],
 })
 export class SecondaryHeaderComponent {
-  public categoryList: string [] = ['Lifestyle', 'IT & Software', 'World News'];
+  public categoryList: string[] = ['Lifestyle', 'IT & Software', 'World News'];
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -22,7 +22,7 @@ export class SecondaryHeaderComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   public openQuestionDialog(): void {
     const dialogRef = this.dialog.open(AskQuestionDialogComponent, {

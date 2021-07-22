@@ -1,20 +1,19 @@
 .main-div {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .login-card {
-    width: 30%;
-  }
-  
-  .example-header-image {
-    background-image: url("../../../../../assets/images/register.png");
-    background-size: cover;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 30%;
+}
+
+.example-header-image {
+  background-image: url("../../../../../assets/images/register.png");
+  background-size: cover;
+}
+
+.mat-form-field {
+  width: 100%;
+}

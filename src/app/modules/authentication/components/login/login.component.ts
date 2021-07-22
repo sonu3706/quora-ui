@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RestService } from '../../../../services/utilities/rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';

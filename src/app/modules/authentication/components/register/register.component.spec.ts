@@ -1,25 +1,33 @@
-import {ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
+import {
+  ComponentFixture,
+  discardPeriodicTasks,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 
-import {RegisterComponent} from './register.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MaterialModule} from '../../../material/material.module';
-import {SharedModule} from '../../../shared/shared.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {RouterTestingModule} from "@angular/router/testing";
-import {RestService} from "../../../../services/utilities/rest.service";
-import {of} from "rxjs";
+import { RegisterComponent } from './register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../../material/material.module';
+import { SharedModule } from '../../../shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RestService } from '../../../../services/utilities/rest.service';
+import { of } from 'rxjs';
 
 describe('RegisterComponent', () => {
   let registerComponent: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-  let httpTestingController: HttpTestingController;
   let registerServiceSpy: RestService<any>;
 
   beforeEach(async () => {
-    const registerSpyObject = jasmine.createSpyObj('RestService', ['postDataApi']);
+    const registerSpyObject = jasmine.createSpyObj('RestService', [
+      'postDataApi',
+    ]);
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       imports: [
@@ -31,9 +39,9 @@ describe('RegisterComponent', () => {
         BrowserModule,
         HttpClientModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
-      providers: [{provide: RestService, useValue: registerSpyObject}],
+      providers: [{ provide: RestService, useValue: registerSpyObject }],
     }).compileComponents();
   });
 
@@ -85,7 +93,6 @@ describe('RegisterComponent', () => {
     firstNameControl.setValue('');
     expect(firstNameControl.invalid).toBeTruthy();
     expect(firstNameControl.hasError('required')).toBeTrue();
-
   });
 
   it('[Last Name]- Last name is required', () => {
@@ -186,11 +193,10 @@ describe('RegisterComponent', () => {
     tick();
     flush();
     discardPeriodicTasks();
-
   }));
 });
 
 /* Private method to construct user object */
 function getUserObject(): any {
-  return {userEmail: 'chandan@abc.com', userPassword: '12345678'};
+  return { userEmail: 'chandan@abc.com', userPassword: '12345678' };
 }

@@ -15,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 
-
 @NgModule({
   declarations: [],
   imports: [
@@ -33,7 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatMenuModule,
     MatRadioModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   exports: [
     LayoutModule,
@@ -49,7 +48,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatMenuModule,
     MatRadioModule,
-    MatChipsModule
+    MatChipsModule,
   ],
 })
-export class MaterialModule { }
+export class MaterialModule {}

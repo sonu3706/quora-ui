@@ -37,7 +37,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('[Email Valid] - Email should be valid',  () => {
+  it('[Email Valid] - Email should be valid', () => {
     let emailControl = component.loginForm.controls.email;
     emailControl.setValue('abc@abc.com');
     expect(emailControl.value).toBe('abc@abc.com');
@@ -46,7 +46,7 @@ describe('LoginComponent', () => {
     expect(emailControl.hasError('email')).toBeFalse();
   });
 
-  it('[Email Invalid] - Email should be Invalid',  () => {
+  it('[Email Invalid] - Email should be Invalid', () => {
     let emailControl = component.loginForm.controls.email;
     emailControl.setValue('abc');
     expect(emailControl.value).toBe('abc');
@@ -54,7 +54,7 @@ describe('LoginComponent', () => {
     expect(emailControl.hasError('email')).toBeTrue();
   });
 
-  it('[Email Required] - Email should be required should pass',  () => {
+  it('[Email Required] - Email should be required should pass', () => {
     let emailControl = component.loginForm.controls.email;
     emailControl.setValue('abc@abc.com');
     expect(emailControl.value).toBe('abc@abc.com');
@@ -62,7 +62,7 @@ describe('LoginComponent', () => {
     expect(emailControl.hasError('required')).toBeFalse();
   });
 
-  it('[Email Required Fail] - Email should be required should fail',  () => {
+  it('[Email Required Fail] - Email should be required should fail', () => {
     let emailControl = component.loginForm.controls.email;
     emailControl.setValue('');
     expect(emailControl.invalid).toBeTrue();
