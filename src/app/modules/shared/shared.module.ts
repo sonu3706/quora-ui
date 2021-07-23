@@ -10,9 +10,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DataService } from 'src/app/services/utilities/data.service';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [MainHeaderComponent, SecondaryHeaderComponent],
+  declarations: [MainHeaderComponent, SecondaryHeaderComponent, MainComponent],
   imports: [
     CommonModule,
     MaterialModule,
