@@ -1,0 +1,23 @@
+#main-page {
+  height: 650px;
+  color: #fff;
+  background-image: url("https://qsf.fs.quoracdn.net/-4-ans_frontend_assets.images.home_page_bg_desktop.png-26-4770753d59b970e1.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.main-card {
+  width: 30%;
+  height: 30%;
+}
+
+.main-div {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
