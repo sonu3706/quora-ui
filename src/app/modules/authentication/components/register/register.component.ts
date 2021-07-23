@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data) {
-            //this.saveUser();
+            this.saveUser();
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {

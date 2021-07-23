@@ -43,9 +43,6 @@ describe('RegisterComponent', () => {
       ],
       providers: [{ provide: RestService, useValue: registerSpyObject }],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
     registerComponent = fixture.componentInstance;
     registerServiceSpy = TestBed.inject(RestService);
